@@ -1,0 +1,22 @@
+*{
+    background-color: #001B34;    
+    margin: 0%;
+    padding: 0%;
+    
+}
+
+.nav-cont{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.nav-cont h1{
+    color: #4FB9F4;    
+}
+
+.nav-cont h1 span{
+    color: white;
+}
+
