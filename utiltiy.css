@@ -6,3 +6,7 @@
   font-variation-settings:
     "wdth" 100;
 }
+
+.invert {
+  filter: invert(1);
+}
