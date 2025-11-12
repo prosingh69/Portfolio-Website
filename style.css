@@ -54,29 +54,254 @@
     color: #4FB9F4;
 }
 
-.nav-cont-btn{
+/* In your style.css file: */
+
+.nav-cont-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 7px;  
-     
+    gap: 7px;       
     padding: 10px 15px; 
     background-color: #FF48AF;
     border-radius: 0.4rem;
     cursor: pointer;
+    text-decoration: none;  
 }
 .nav-cont-btn:hover{
-    border: 0.4px solid #4FB9F4;
-    transform: scale(1);
+    transform: scale(1.1);
 }
-.nav-cont-btn a{
+
+.nav-cont-btn a {
     color: white;
-    text-decoration: none;
-    background-color: #FF48AF;
+    text-decoration: none; 
+    background-color: transparent; 
 }
-.nav-cont-btn img{
+
+.nav-cont-btn img {
     width: 25px;
-    height: 25px;
-    background-color: #FF48AF;
+    height: 25px;    
+    background-color: transparent;
+}
+.hero-section{
+    display: flex;
+    align-items: center;
+    min-width: 60vw;
+}
+.hero-image-area {
+    flex-basis: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 550px; 
+}
+
+.rhombus-image-container {
+    width: 330px; 
+    height: 330px;
+    position: relative;        
+    transform: rotate(45deg);    
+    overflow: hidden;
+    border-radius: 15px;     
+    margin-left: 20px;
+    box-shadow: 0 0 40px rgba(134, 60, 237, 0.249); /*innerglow*/
+}
+
+.rhombus-image-container::before {
+    content: '';
+    position: absolute;    
+    inset: -25px; 
+    box-shadow: 0 0 25px 5px rgba(168, 85, 247, 0.6);    
+    border-radius: 35px; 
+    z-index: 1;
+}
+
+.rhombus-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;    
+    transform: rotate(-45deg) scale(1.42);    
+    transition: transform 0.1s ease;    
+}
+
+.rhombus-image-container:hover img {
+    transform: rotate(-45deg) scale(1.6);
+}
+
+.hero-section-write{
+    margin-left: 10px;
+}
+.hero-section-h2{
+    color: white;
+    font-size: 2rem;
+}
+.hero-section-h1{
+    color: white;
+    font-size: 4rem;
+}
+/* --- Typing Effect Cursor --- */
+
+/* This is the container for the text */
+#typing-text {
+    /* This 'border-right' will act as the cursor */
+    border-right: 3px solid #FF48AF; /* You can change the cursor color here */
+    padding-right: 5px;
+    color: #FF48AF;
+    text-shadow: 0 0 10px rgba(245, 59, 164, 0.6);
     
+    /* Animation to make the cursor blink */
+    animation: blinkCursor 0.75s step-end infinite;
+}
+
+/* Keyframes for the blinking animation */
+@keyframes blinkCursor {
+    from, to { border-color: transparent }
+    50% { border-color: #FF48AF; } 
+}
+
+.hero-section-p{
+    color: white;
+    margin-top: 2rem;
+    width: 46vw;   
+  overflow-wrap: break-word;
+  font-size: 1.1rem;
+}
+
+.hero-section-logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 35px;
+    margin-left: 27px;
+    transform: scale(1.1);
+}
+
+.hero-section-logo img {    
+    transition: transform 0.3s ease;
+    cursor: pointer; 
+}
+
+.hero-section-logo img:hover {    
+    transform: translateY(-10px);
+}
+
+.hero-section-btn{
+    display: flex;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+.hero-section-hire-btn {
+    /* Aapke original styles */
+    border: 2px solid #FF48AF;
+    text-decoration: none;
+    padding: 10px 30px;
+    background-color: #001B34;
+    border-radius: 5px;
+    color: #FF48AF;
+    font-size: 1.1rem; /* Pichle code se liya gaya */
+    
+    /* --- Yahan se effect ke liye code shuru --- */
+
+    /* 1. Isse hum ::before element ko button ke andar position kar payenge */
+    position: relative; 
+    
+    /* 2. Jo layer slide hogi, woh isse bahar nahi dikhegi */
+    overflow: hidden; 
+    
+    /* 3. Text ko hamesha upar (layer ke) rakhne ke liye */
+    z-index: 1; 
+    
+    /* 4. Text color ke change ko smooth banane ke liye */
+    transition: color 0.4s ease-in-out; 
+    
+    cursor: pointer;
+}
+
+/* Yeh woh pink layer hai jo slide hogi */
+.hero-section-hire-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FF48AF; /* Yeh layer ka color hai */
+    
+    /* 5. Shuru mein yeh layer right side mein chhipi rahegi (100%) */
+    transform: translateX(100%);
+    
+    /* 6. Slide animation ko smooth banane ke liye */
+    transition: transform 0.4s ease-in-out;
+    
+    /* 7. Is layer ko text ke piche rakhne ke liye */
+    z-index: -1;
+}
+
+.hero-section-hire-btn:hover {
+    /* 1. Hover par text ka color badal jayega */
+    color: #001B34; 
+}
+
+.hero-section-hire-btn:hover::before {
+    /* 2. Hover par, layer slide hokar button ko cover kar legi (0%) */
+    transform: translateX(0);
+}
+
+
+
+.hero-section-contact-btn {
+    /* Aapke original styles */
+    border: 2px solid #FF48AF;
+    text-decoration: none;
+    padding: 10px 30px;
+    background-color: #001B34;
+    border-radius: 5px;
+    color: #FF48AF;
+    font-size: 1.1rem; /* Pichle code se liya gaya */
+    
+    /* --- Yahan se effect ke liye code shuru --- */
+
+    /* 1. Isse hum ::before element ko button ke andar position kar payenge */
+    position: relative; 
+    
+    /* 2. Jo layer slide hogi, woh isse bahar nahi dikhegi */
+    overflow: hidden; 
+    
+    /* 3. Text ko hamesha upar (layer ke) rakhne ke liye */
+    z-index: 1; 
+    
+    /* 4. Text color ke change ko smooth banane ke liye */
+    transition: color 0.4s ease-in-out; 
+    
+    cursor: pointer;
+}
+
+/* Yeh woh pink layer hai jo slide hogi */
+.hero-section-contact-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FF48AF; /* Yeh layer ka color hai */
+    
+    /* 5. Shuru mein yeh layer right side mein chhipi rahegi (100%) */
+    transform: translateX(-100%);
+    
+    /* 6. Slide animation ko smooth banane ke liye */
+    transition: transform 0.4s ease-in-out;
+    
+    /* 7. Is layer ko text ke piche rakhne ke liye */
+    z-index: -1;
+}
+
+.hero-section-contact-btn:hover {
+    /* 1. Hover par text ka color badal jayega */
+    color: #001B34; 
+}
+
+.hero-section-contact-btn:hover::before {
+    /* 2. Hover par, layer slide hokar button ko cover kar legi (0%) */
+    transform: translateX(0);
 }
