@@ -1,70 +1,80 @@
 // Wait for the DOM content to be fully loaded before running the script
 document.addEventListener("DOMContentLoaded", function () {
-  // Get the span element by its ID
+  // 1. Initialize AOS (Animate on Scroll)
+  AOS.init({
+    duration: 1000, // Animation kitni der chalegi (in ms). Increased for smoother feel.
+    once: false, // Animation scroll down/up par repeat ho
+    offset: 120, // Kitna scroll karne par trigger ho (in px). Adjusted for better timing.
+    mirror: true, // Animation reverse ho jab scroll up karein
+    easing: "ease-in-out", // Animation ki timing function
+  });
+
+  // 2. Typing Text Effect
   const typingTextElement = document.getElementById("typing-text");
+  if (typingTextElement) {
+    const wordsToType = [
+      "Web Developer",
+      "Frontend Developer",
+      "Backend Developer",
+      "Youtuber",
+      "Editor",
+    ];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeSpeed = 150;
+    let deleteSpeed = 100;
+    let pauseTime = 2000;
 
-  // The list of words you want to cycle through
-  const wordsToType = [
-    "Web Developer",
-    "Frontend Developer",
-    "Backend Developer",
-    "Youtuber",
-    "Editor",
-  ];
+    function typeEffect() {
+      const currentWord = wordsToType[wordIndex];
+      let currentSpeed = typeSpeed;
 
-  // Initialize variables
-  let wordIndex = 0; // Current word index
-  let charIndex = 0; // Current character index in the word
-  let isDeleting = false; // State to check if we are deleting
-  let typeSpeed = 150; // Speed of typing
-  let deleteSpeed = 100; // Speed of deleting
-  let pauseTime = 2000; // Pause time at the end of a word
+      if (isDeleting) {
+        currentSpeed = deleteSpeed;
+        typingTextElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        currentSpeed = typeSpeed;
+        typingTextElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+      }
 
-  function typeEffect() {
-    // Get the current word from the array
-    const currentWord = wordsToType[wordIndex];
-
-    // Set a dynamic timeout speed
-    let currentSpeed = typeSpeed;
-
-    if (isDeleting) {
-      // If we are deleting, set speed to deleteSpeed
-      currentSpeed = deleteSpeed;
-
-      // Remove one character
-      typingTextElement.textContent = currentWord.substring(0, charIndex - 1);
-      charIndex--;
-    } else {
-      // If we are typing, set speed to typeSpeed
-      currentSpeed = typeSpeed;
-
-      // Add one character
-      typingTextElement.textContent = currentWord.substring(0, charIndex + 1);
-      charIndex++;
+      if (!isDeleting && charIndex === currentWord.length) {
+        currentSpeed = pauseTime;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % wordsToType.length;
+      }
+      setTimeout(typeEffect, currentSpeed);
     }
-
-    // --- Check for state changes ---
-
-    // 1. If NOT deleting and word is fully typed
-    if (!isDeleting && charIndex === currentWord.length) {
-      // Pause at the end of the word
-      currentSpeed = pauseTime;
-      // Switch to deleting state
-      isDeleting = true;
-    }
-
-    // 2. If deleting and word is fully deleted
-    else if (isDeleting && charIndex === 0) {
-      // Switch to typing state
-      isDeleting = false;
-      // Move to the next word (loop back to 0 if at the end)
-      wordIndex = (wordIndex + 1) % wordsToType.length;
-    }
-
-    // Call the function again after the calculated speed
-    setTimeout(typeEffect, currentSpeed);
+    // Start the typing effect
+    typeEffect();
   }
+}); // DOMContentLoaded yahan band hota hai
 
-  // Start the typing effect
-  typeEffect();
+// 3. Mouse Move Gradient Effect (Pehle se tha)
+document.addEventListener("mousemove", function (e) {
+  document.body.style.setProperty("--mouse-x", e.clientX + "px");
+  document.body.style.setProperty("--mouse-y", e.clientY + "px");
 });
+
+// 4. Lenis Smooth Scroll & Progress Bar
+const lenis = new Lenis();
+
+const progressBar = document.querySelector(".progress-bar");
+
+lenis.on("scroll", (e) => {
+  if (progressBar) {
+    const scrollPercent = e.progress * 100;
+    progressBar.style.width = scrollPercent + "%";
+  }
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
