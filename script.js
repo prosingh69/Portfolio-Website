@@ -2,11 +2,11 @@
 document.addEventListener("DOMContentLoaded", function () {
   // 1. Initialize AOS (Animate on Scroll)
   AOS.init({
-    duration: 1000, // Animation kitni der chalegi (in ms). Increased for smoother feel.
-    once: false, // Animation scroll down/up par repeat ho
-    offset: 120, // Kitna scroll karne par trigger ho (in px). Adjusted for better timing.
-    mirror: true, // Animation reverse ho jab scroll up karein
-    easing: "ease-in-out", // Animation ki timing function
+    duration: 1000,
+    once: false,
+    offset: 120,
+    mirror: true,
+    easing: "ease-in-out",
   });
 
   // 2. Typing Text Effect
@@ -49,12 +49,46 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       setTimeout(typeEffect, currentSpeed);
     }
-    // Start the typing effect
     typeEffect();
   }
+
+  // NAYA: Hamburger Menu Logic (Updated)
+  const hamburgerIcon = document.querySelector(".nav-hamburger-icon");
+  const navLinksContainer = document.querySelector(
+    ".nav-mobile-menu-container"
+  ); // Selector badla gaya
+  const navIcon = hamburgerIcon.querySelector("i"); // Icon tag (<i>)
+
+  hamburgerIcon.addEventListener("click", () => {
+    // Menu ko toggle karein
+    navLinksContainer.classList.toggle("active");
+
+    // Icon ko (bars) se (X) karein
+    if (navLinksContainer.classList.contains("active")) {
+      navIcon.classList.remove("fa-bars");
+      navIcon.classList.add("fa-xmark");
+    } else {
+      navIcon.classList.remove("fa-xmark");
+      navIcon.classList.add("fa-bars");
+    }
+  });
+
+  // NAYA: Jab kisi link par click ho, toh mobile menu band karein (Updated)
+  const navLinks = document.querySelectorAll(
+    ".nav-mobile-menu-container .nav-cont-links a"
+  ); // Selector badla gaya
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (navLinksContainer.classList.contains("active")) {
+        navLinksContainer.classList.remove("active");
+        navIcon.classList.remove("fa-xmark");
+        navIcon.classList.add("fa-bars");
+      }
+    });
+  });
 }); // DOMContentLoaded yahan band hota hai
 
-// 3. Mouse Move Gradient Effect (Pehle se tha)
+// 3. Mouse Move Gradient Effect
 document.addEventListener("mousemove", function (e) {
   document.body.style.setProperty("--mouse-x", e.clientX + "px");
   document.body.style.setProperty("--mouse-y", e.clientY + "px");

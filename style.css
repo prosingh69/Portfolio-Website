@@ -24,17 +24,18 @@ body {
 }
 
 /* ======================= */
-/* NAVBAR SECTION       */
+/* NAVBAR SECTION (UPDATED) */
 /* ======================= */
 .nav-cont {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 1rem 0;
+  justify-content: space-between; /* BADLA: space-around se space-between */
+  padding: 1rem 40px; /* BADLA: Padding add ki */
   position: sticky;
   top: 0;
   width: 100%;
   z-index: 1000;
+  box-sizing: border-box;
 
   /* theme se milta hua glass background effect */
   background-color: rgba(0, 27, 52, 0.85);
@@ -51,11 +52,16 @@ body {
   color: white;
 }
 
+/* NAYA: Mobile menu container ko desktop par hide karein */
+.nav-mobile-menu-container {
+  display: none;
+}
+
 .nav-cont-links {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 70px;
+  gap: 40px;
   font-size: 1.1rem;
 }
 .nav-cont-links a {
@@ -71,7 +77,6 @@ body {
   width: 0;
   height: 2px;
   background-color: #4fb9f4;
-
   transition: width 0.3s ease;
 }
 
@@ -109,6 +114,14 @@ body {
   background-color: transparent;
 }
 
+/* NAYA: Hamburger Icon (Desktop par hidden) */
+.nav-hamburger-icon {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: white;
+}
+
 /* ======================= */
 /* HERO SECTION       */
 /* ======================= */
@@ -116,6 +129,7 @@ body {
   display: flex;
   align-items: center;
   min-width: 60vw;
+  box-sizing: border-box; /* Added for better padding control */
 }
 .hero-image-area {
   flex-basis: 45%;
@@ -313,8 +327,8 @@ body {
   background: linear-gradient(
     90deg,
     #ff48af,
-    /*  Pink */ #d7bfea,
-    /* Beech mein White */ #4fb9f4 /*  Blue */
+    /* Pink */ #d7bfea,
+    /* Beech mein White */ #4fb9f4 /* Blue */
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -609,8 +623,8 @@ body {
   background: linear-gradient(
     90deg,
     #ff48af,
-    /*  Pink */ #d7bfea,
-    /* Beech mein White */ #4fb9f4 /*  Blue */
+    /* Pink */ #d7bfea,
+    /* Beech mein White */ #4fb9f4 /* Blue */
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -686,8 +700,6 @@ body {
   }
 }
 
-/* ... (Aapka poora style.css content) ... */
-
 /* ======================= */
 /* NAYA: Hero Image Float Animation */
 /* ======================= */
@@ -731,13 +743,7 @@ body {
   /* Aapke theme gradient ka istemal */
   background: linear-gradient(90deg, #ff48af, #4fb9f4);
   z-index: 9999;
-  /* Ise hatane par animation thoda "laggy" lagega */
-  /* transition: width 0.1s ease-out; */
 }
-
-
-
-/* ... (Existing CSS) ... */
 
 /* ================================== */
 /* CONTACT SECTION STYLING (Form with Glass Box) */
@@ -745,7 +751,7 @@ body {
 .contact-section {
   max-width: 1200px; /* Thoda zyada width denge taaki form aur animation dono fit ho sakein */
   margin: 0 auto;
-  padding: 10px 25px 100px 25px;
+  padding: 40px 25px 100px 25px; /* Top padding kam ki */
   text-align: center;
   box-sizing: border-box;
 }
@@ -768,14 +774,14 @@ body {
   margin: 0 auto 80px auto; /* Footer se pehle space */
 }
 
-@media (min-width: 900px) { /* Jab screen badi ho, toh side-by-side */
+@media (min-width: 900px) {
+  /* Jab screen badi ho, toh side-by-side */
   .contact-content-wrapper {
     flex-direction: row;
     justify-content: center;
-    align-items: center; /* Ise badal dein */
+    align-items: center; /* Vertically center */
   }
 }
-
 
 /* NAYA: Glass Effect Form Container */
 .contact-form-container {
@@ -785,7 +791,7 @@ body {
   padding: 40px;
   border-radius: 15px;
   text-align: left;
-  
+
   /* Glass Effect */
   background-color: rgba(0, 27, 52, 0.6); /* Thoda zyada transparent */
   backdrop-filter: blur(15px);
@@ -826,10 +832,10 @@ body {
   border-radius: 8px; /* Thoda zyada rounded */
   font-size: 1rem;
   color: white;
-  
+
   background-color: rgba(0, 0, 0, 0.3); /* Input fields ka bg */
   border: 1px solid rgba(255, 72, 175, 0.2); /* Pink border */
-  
+
   box-sizing: border-box;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -846,27 +852,59 @@ body {
 }
 
 .contact-button {
-  width: 100%; 
+  width: 100%;
   border: none;
   border-radius: 5px;
   margin-top: 10px;
   padding: 16px 35px;
-  font-size: 1.15rem; /* Button ka font thoda chhota */
+  font-size: 1.15rem;
+
+  /* Re-using hero button styles */
+  border: 2px solid #ff48af;
+  text-decoration: none;
+  background-color: #001b34;
+  color: #ff48af;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.4s ease-in-out;
+  cursor: pointer;
+}
+
+.contact-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ff48af;
+  transform: translateX(100%);
+  transition: transform 0.4s ease-in-out;
+  z-index: -1;
+}
+
+.contact-button:hover {
+  color: #001b34;
+}
+
+.contact-button:hover::before {
+  transform: translateX(0);
 }
 
 /* NAYA: 3D Animation Area */
 .contact-animation-area {
   flex: 1;
-  min-width: 500px;
-  max-width: 600px; 
+  min-width: 300px; /* Changed from 500px for mobile */
+  max-width: 500px; /* Changed from 600px */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 500px;   
+  height: 500px;
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
 }
-.robot{
+.robot {
   transform: scale(1.25);
 }
 
@@ -877,8 +915,162 @@ body {
   display: block;
 }
 
-
 /* Footer Credit Container  */
 .footer-credit-container {
-  margin-top: 60px; 
+  margin-top: 60px;
+}
+
+.footer-social-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.footer-social-links a {
+  color: white;
+  font-size: 1.8rem;
+  transition: all 0.3s ease;
+}
+
+.footer-social-links a:hover {
+  color: #ff48af;
+  transform: translateY(-5px);
+}
+
+.footer-credit {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  margin-top: 25px; /* Social links se alag */
+}
+
+/* ================================== */
+/* RESPONSIVE MEDIA QUERIES (UPDATED) */
+/* ================================== */
+@media (max-width: 900px) {
+  /* --- NAVBAR --- */
+  .nav-cont {
+    justify-content: space-between; /* Logo left, icon right */
+    padding: 1rem 25px; /* Horizontal padding */
+  }
+
+  /* NAYA: Hide desktop links and button */
+  .desktop-links,
+  .desktop-btn {
+    display: none;
+  }
+
+  /* NAYA: Mobile menu container (jo JS se toggle hoga) */
+  .nav-mobile-menu-container {
+    display: none; /* Default hidden */
+
+    /* Full-screen menu styles */
+    position: absolute;
+    top: 69px; /* Navbar ki height (aap adjust kar sakte hain) */
+    left: 0;
+    width: 100%;
+
+    background-color: rgba(0, 27, 52, 0.98); /* Solid-ish glass */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    flex-direction: column; /* Links ko stack karein */
+    padding: 20px 0 30px 0;
+    gap: 25px;
+    align-items: center;
+    border-bottom: 1px solid rgba(79, 185, 244, 0.1);
+  }
+
+  /* Yeh class JS se add/remove hogi */
+  .nav-mobile-menu-container.active {
+    display: flex;
+  }
+
+  /* Mobile menu ke andar ke links */
+  .nav-mobile-menu-container .nav-cont-links {
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    align-items: center;
+  }
+
+  /* Hamburger icon ko dikhayein */
+  .nav-hamburger-icon {
+    display: block;
+  }
+
+  /* --- HERO SECTION --- */
+  .hero-section {
+    flex-direction: column; /* Stack image and text */
+    padding: 0 25px; /* Padding */
+    text-align: center; /* Text center karein */
+  }
+
+  .hero-image-area {
+    flex-basis: auto; /* Width reset karein */
+    min-height: auto; /* Height reset karein */
+    margin-bottom: 40px;
+    margin-top: 40px;
+  }
+
+  .rhombus-image-container {
+    width: 280px; /* Image thodi chhoti */
+    height: 280px;
+    margin-left: 0;
+  }
+
+  .hero-section-write {
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Saara text content center karein */
+  }
+
+  .hero-section-h1 {
+    font-size: 3rem; /* Font size kam karein */
+  }
+  .hero-section-h2 {
+    font-size: 1.75rem; /* Font size kam karein */
+  }
+
+  .hero-section-p {
+    width: auto; /* 46vw ko reset karein */
+    font-size: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .hero-section-logo {
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .hero-section-btn {
+    justify-content: center;
+    margin-top: 20px;
+    gap: 15px;
+    flex-wrap: wrap; /* Buttons ko wrap karein */
+  }
+
+  .hero-section-hire-btn,
+  .hero-section-contact-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+
+  /* --- OTHER SECTIONS (Font size) --- */
+  .section-title {
+    font-size: 2.5rem; /* Section titles ko chhota karein */
+  }
+  .about-title {
+    font-size: 2.5rem; /* Section titles ko chhota karein */
+  }
+
+  /* --- CONTACT FORM --- */
+  .contact-animation-area {
+    min-width: 300px;
+    height: 300px; /* Animation area chhota karein */
+  }
+  .robot {
+    transform: scale(1); /* Animation scale reset karein */
+  }
 }
