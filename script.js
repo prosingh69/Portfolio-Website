@@ -105,6 +105,24 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   requestAnimationFrame(raf);
+
+const allNavLinks = document.querySelectorAll('a[href^="#"]'); // Sabhi links jo # se shuru hote hain
+
+  allNavLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault(); // Default jump roko
+      const targetId = link.getAttribute('href'); // e.g. "#about"
+      
+      // Lenis ka use karke smooth scroll karo
+      if (targetId !== "#") {
+        lenis.scrollTo(targetId, {
+            offset: -50, // Thoda gap rakhne ke liye taaki header content ko na dhake
+            duration: 1.5 // Scroll speed adjust kar sakte hain
+        }); 
+      }
+     
+    });
+  });
 }); // DOMContentLoaded ends here
 
 // 6. Mouse Move Gradient Effect (STAYS OUTSIDE)
@@ -113,3 +131,5 @@ document.addEventListener("mousemove", function (e) {
   document.body.style.setProperty("--mouse-x", e.clientX + "px");
   document.body.style.setProperty("--mouse-y", e.clientY + "px");
 });
+
+
