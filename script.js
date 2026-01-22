@@ -119,8 +119,7 @@ const allNavLinks = document.querySelectorAll('a[href^="#"]'); // Sabhi links jo
             offset: -50, // Thoda gap rakhne ke liye taaki header content ko na dhake
             duration: 1.5 // Scroll speed adjust kar sakte hain
         }); 
-      }
-     
+      }     
     });
   });
 }); // DOMContentLoaded ends here
